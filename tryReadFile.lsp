@@ -1,0 +1,6 @@
+(defun readAFile ()
+(with-open-file (stream "/Users/felixxie/Documents/class record/USC/Fall 13/AI/Project/extra/graph")
+    (do ((line (read-line stream nil)
+               (read-line stream nil)))
+        ((null line))
+      (print line))))
