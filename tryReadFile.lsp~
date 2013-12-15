@@ -1,5 +1,0 @@
-(with-open-file (stream "/graph")
-    (do ((line (read-line stream nil)
-               (read-line stream nil)))
-        ((null line))
-      (print line)))
