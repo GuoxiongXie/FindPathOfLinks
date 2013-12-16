@@ -6,17 +6,24 @@
 (defun bfs (graphList start goal)
   (setq expandedNodes '())
   (setq queue '())
+  
+  (setq queue (append queue (list (list start)))) ;(("start")) want (("s")("a" "s")) as queue
+  ;note that within each inner (), the newer node comes first
 
-  (setq queue (append queue (list (list start)))) ;(("start")) want (("s")("a" "s"))
   (loop while (eql (null queue) nil) do
+	(setq curPath (car queue)) ;the curNode in this sequence
 	(setq curNode (caar queue)) ;get the current node being expanded
 	(setq queue (cdr queue)) ;remove the path being expanded
 	(cond
 	 ((notExpanded curNode expandedNodes)
 	  (setq expandedNodes (append expandedNodes (list curNode))) ;add to expandedNode
+
+	  
+	  (cond 
+	   ;if goal, return curPath (need to format it tho)
+	   ((equal curNode goal) (return-from bfs (genResult (reverse curPath) '())))
 	  ;if not goal, get successor
-	  ;if goal, check how to return result
-	 
+	   
 
 	 (t ;already expanded, go to next round of loop
 	
@@ -26,6 +33,10 @@
    ((null expandedNodes) t) ;'() or nil
    ((equal curNode (car expandedNodes)) nil)
    (t (notExpanded curNode (cdr expandedNodes)))))
+
+(defun genResult (path cum) ;cum is used for cummulating results
+  
+  
    
 
 (defun populateTable (table graphlist)
