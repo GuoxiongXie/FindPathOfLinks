@@ -1,9 +1,18 @@
 (defun find-URL-path (start goal)
   (with-open-file (stream "/Users/felixxie/Documents/class record/USC/Fall 13/AI/Project/extra/graph")
+    (setq graphList (read stream))
     (cond
      ((equal start goal) (list start)) ;if start and goal are the same website just '(start)
+     ((noStart start graphList) '(Please check the start page))
      (t
-      (bfs (read stream) start goal)))))
+      (bfs graphList start goal)))))
+
+
+(defun noStart (start graphList)
+  (cond
+   ((null graphList) t)
+   ((equal start (caar graphList)) nil)
+   (t (noStart start (cdr graphList)))))
 
 
 (defun bfs (graphList start goal)
@@ -31,7 +40,7 @@
 	 (t ))) ;already expanded, go to next round of loop
 
   ;finish looping, no goal is hit
-  '(Sorry but no path is found))
+  '(Please check the goal page))
 
 (defun buildNewPart (curNode curPath graphList) ;need to return '((child parent) (child parent))
   (mapcar (lambda (child) (cons child curPath)) (getSuccessors curNode graphList)))
