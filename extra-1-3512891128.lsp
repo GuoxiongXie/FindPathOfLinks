@@ -1,6 +1,9 @@
 (defun find-URL-path (start goal)
   (with-open-file (stream "/Users/felixxie/Documents/class record/USC/Fall 13/AI/Project/extra/graph")
-    (bfs (read stream) start goal)))
+    (cond
+     ((equal start goal) (list start)) ;if start and goal are the same website just '(start)
+     (t
+      (bfs (read stream) start goal)))))
 
 
 (defun bfs (graphList start goal)
@@ -22,11 +25,11 @@
 	  (cond 
 	   ;if goal, return curPath (need to format it tho)
 	   ((equal curNode goal) (return-from bfs (genResult (reverse curPath) '())))
-	  ;if not goal, get successor
-	   
+	   ;if not goal, get successor
+	   (t ;not goal
 
 	 (t ;already expanded, go to next round of loop
-	
+	  
   
 (defun notExpanded (curNode expandedNodes)  ;tested
   (cond
@@ -34,8 +37,11 @@
    ((equal curNode (car expandedNodes)) nil)
    (t (notExpanded curNode (cdr expandedNodes)))))
 
-(defun genResult (path cum) ;cum is used for cummulating results
-  
+(defun genResult (path cum) ;cum is used for cummulating results; originally cum='(); tested
+  (cond
+   ((null (cdr path)) cum) ;there's only one element left
+   (t
+    (genResult (cdr path) (append cum (list (list (car path) (cadr path))))))))
   
    
 
