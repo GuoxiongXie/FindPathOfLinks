@@ -1,15 +1,20 @@
 (defun find-URL-path (start goal)
   (with-open-file (stream "/Users/felixxie/Documents/class record/USC/Fall 13/AI/Project/extra/graph")
+    (bfs (read stream) start goal)))
 
-    (defparameter table (make-hash-table))
 
-    (mapcar (lambda (kvPair) (setf (gethash (car kvPair) table) (cadr kvPair))) (read stream))
-    (gethash start table)
-))
-    ;(cond
-     ;((equalp (caar graphList) start) 888)
-     ;(t 17))))
-    ;(print (list-length (read stream)))))  ;use read will return a list, we can call car on it
+(defun bfs (graphList start goal)
+  (setq expandedNodes '())
+  (setq queue '())
+
+  (setq queue (append queue (list (list start)))) ;(("start")) want (("s")("a" "s"))
+  (loop while (eql (null queue) nil) do
+	(setq curNode (caar queue)) ;get the current node being expanded
+	(setq queue (cdr queue)) ;remove the path being expanded
+	(cond
+	 (
+	
+  
 
 
 (defun populateTable (table graphlist)
