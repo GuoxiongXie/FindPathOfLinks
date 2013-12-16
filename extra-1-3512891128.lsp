@@ -34,8 +34,15 @@
   '(Sorry but no path is found))
 
 (defun buildNewPart (curNode curPath graphList) ;need to return '((child parent) (child parent))
+  (mapcar (lambda (child) (cons child curPath)) (getSuccessors curNode graphList)))
 
-)
+;debug: need to handle the case when disconnected from graph
+(defun getSuccessors (curNode graphList)
+  (cond
+   ((equal curNode (caar graphList)) (cadar graphList))
+   (t  ;maybe need to handle when no match is found
+    (getSuccessors curNode (cdr graphList)))))
+ 
   
 (defun notExpanded (curNode expandedNodes)  ;tested
   (cond
@@ -48,13 +55,3 @@
    ((null (cdr path)) cum) ;there's only one element left
    (t
     (genResult (cdr path) (append cum (list (list (car path) (cadr path))))))))
-  
-   
-
-(defun populateTable (table graphlist)
-  (cond
-   ((eql nil graphlist) 
-    (print (gethash "http://www.berkeley.edu/" table))) ;do i need to return the table?
-   (t  ;not base case 
-    (setf (gethash (caar graphlist) table) (cadar graphlist))
-    (populateTable table (cdr graphlist)))))
