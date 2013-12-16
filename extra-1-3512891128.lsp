@@ -1,5 +1,5 @@
 (defun find-URL-path (start goal)
-  (with-open-file (stream "/Users/felixxie/Documents/class record/USC/Fall 13/AI/Project/extra/graph")
+  (with-open-file (stream "SOMEPATH/extra-1-3512891128/graph") ;please replace SOMEPATH with the location where graph is stored
     (setq graphList (read stream))
     (cond
      ((equal start goal) (list start)) ;if start and goal are the same website just '(start)
