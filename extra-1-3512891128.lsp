@@ -21,15 +21,21 @@
 	 ((notExpanded curNode expandedNodes)
 	  (setq expandedNodes (append expandedNodes (list curNode))) ;add to expandedNode
 
-	  
 	  (cond 
 	   ;if goal, return curPath (need to format it tho)
 	   ((equal curNode goal) (return-from bfs (genResult (reverse curPath) '())))
 	   ;if not goal, get successor
-	   (t ;not goal
+	   (t ;not goal; want buildNewPart returns '((child parent) (child parent))
+	    (setq queue (append queue (buildNewPart curNode curPath graphList)))))) 
 
-	 (t ;already expanded, go to next round of loop
-	  
+	 (t ))) ;already expanded, go to next round of loop
+
+  ;finish looping, no goal is hit
+  '(Sorry but no path is found))
+
+(defun buildNewPart (curNode curPath graphList) ;need to return '((child parent) (child parent))
+
+)
   
 (defun notExpanded (curNode expandedNodes)  ;tested
   (cond
